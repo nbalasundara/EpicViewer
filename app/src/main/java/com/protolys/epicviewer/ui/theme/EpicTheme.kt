@@ -1,6 +1,5 @@
 package com.protolys.epicviewer.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -32,7 +31,9 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color(0xFF1C1B1F),
     */
 )
-
+/*
+DE
+ */
 @Composable
 fun EPICViewerTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
