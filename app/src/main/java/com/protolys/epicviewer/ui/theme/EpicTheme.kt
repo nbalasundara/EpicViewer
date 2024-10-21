@@ -19,7 +19,7 @@ fun EPICViewerTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = ColorPalette,
         typography = Typography,
         content = content
     )
