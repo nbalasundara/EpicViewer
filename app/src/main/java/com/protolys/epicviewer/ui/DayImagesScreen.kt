@@ -1,4 +1,6 @@
 package com.protolys.epicviewer.ui
+import androidx.compose.runtime.Composable
 
-class DayImagesScreen {
+@Composable
+fun DayImagesScreen() {
 }
