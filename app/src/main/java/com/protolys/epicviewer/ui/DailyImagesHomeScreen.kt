@@ -1,21 +1,30 @@
 package com.protolys.epicviewer.ui
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import androidx.compose.ui.unit.dp
 import com.protolys.epicviewer.data.ImageDate
 import com.protolys.epicviewer.data.toDate
 import com.protolys.epicviewer.ui.theme.EPICViewerTheme
 import java.util.Date
 
 @Composable
-fun DailyImagesHomeScreen() {
+fun DailyImagesHomeScreen(
+
+) {
     val dailyImages = rememberSaveable() {
         listOf(
             ImageDate("2024-10-20".toDate()),
@@ -23,7 +32,11 @@ fun DailyImagesHomeScreen() {
             ImageDate("2024-10-18".toDate())
         )
     }
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier
+            .padding(16.dp)
+            .semantics { contentDescription = "Daily Images Home Screen" }
+    ) {
         items(dailyImages, key = {imageDate -> imageDate.id})
         {
             showDay(it)
@@ -41,6 +54,8 @@ fun showDay(imageDate:ImageDate/*, modifier: Modifier = Modifier*/) {
     )
 }
 
+//
+// Previews
 class DayImagesParameterProvider : PreviewParameterProvider<ImageDate> {
     override val values = sequenceOf(
         ImageDate("2024-10-20".toDate()),

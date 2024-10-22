@@ -31,7 +31,7 @@ class EpicActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize(), containerColor = ColorPalette.primaryContainer) { innerPadding ->
                     EpicNavHost(
                         navController = navController,
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding).fillMaxSize()
                     )
                 }
             }
