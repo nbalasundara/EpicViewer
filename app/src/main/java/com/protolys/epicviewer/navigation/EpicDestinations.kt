@@ -1,6 +1,5 @@
 package com.protolys.epicviewer.navigation
 
-import java.util.Date
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 
@@ -14,8 +13,8 @@ interface EpicDestination {
 /**
  * Epic app navigation destinations
  */
-object DailyImages : EpicDestination {
-    override val route = "dayImages"
+object DailyImagesHome : EpicDestination {
+    override val route = "DailyImagesHome"
 }
 
 object DayImages : EpicDestination {
@@ -26,7 +25,7 @@ object DayImages : EpicDestination {
 }
 
 object DayImage : EpicDestination {
-    override val route = "dayImage"
+    override val route = "dayImageDetail"
     val arguments = listOf(
         navArgument("date") { type = NavType.StringType }
     )
@@ -34,7 +33,7 @@ object DayImage : EpicDestination {
 
 // Maybe this one is not a Navigation destination but a dialog // TODO
 object DayImageDetail : EpicDestination {
-    override val route = "dayImageDetail"
+    override val route = "dayImageDetailPopup"
     val arguments = listOf(
         navArgument("date") { type = NavType.StringType }
     )

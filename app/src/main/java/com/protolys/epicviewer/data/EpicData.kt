@@ -69,4 +69,12 @@ data class ImageDate(
 ) {
     // a convenience function for the lazy list and other compose components
     val id = date.hashCode()
+    // For home screen
+    val monsun : String
+    init {
+        val formatter = SimpleDateFormat("EEEEEEEE")
+        val utcZone: TimeZone = TimeZone.getTimeZone("UTC")
+        formatter.timeZone = utcZone
+        monsun = formatter.format(date)
+    }
 }

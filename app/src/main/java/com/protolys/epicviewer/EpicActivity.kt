@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.protolys.epicviewer.navigation.DailyImagesHome
 import com.protolys.epicviewer.navigation.DayImages
 import com.protolys.epicviewer.ui.theme.ColorPalette
 import com.protolys.epicviewer.ui.theme.EPICViewerTheme
@@ -26,7 +27,7 @@ class EpicActivity : ComponentActivity() {
                 // Fetch your currentDestination:
                 val currentDestination = currentBackStack?.destination
                 // Change the variable to this and use Overview as a backup screen if this returns null
-                val currentScreen = DayImages
+                val currentScreen = DailyImagesHome
                 Scaffold(modifier = Modifier.fillMaxSize(), containerColor = ColorPalette.primaryContainer) { innerPadding ->
                     EpicNavHost(
                         navController = navController,

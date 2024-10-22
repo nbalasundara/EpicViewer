@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.protolys.epicviewer.navigation.DailyImages
+import com.protolys.epicviewer.navigation.DailyImagesHome
 import com.protolys.epicviewer.navigation.DayImageDetail
 import com.protolys.epicviewer.navigation.DayImages
 import com.protolys.epicviewer.navigation.DayImagesAnimation
@@ -21,10 +21,10 @@ fun EpicNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = DailyImages.route,
+        startDestination = DailyImagesHome.route,
         modifier = modifier
     ) {
-        composable(route = DailyImages.route) {
+        composable(route = DailyImagesHome.route) {
             DailyImagesHomeScreen(
             )
         }
