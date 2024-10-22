@@ -16,6 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.protolys.epicviewer.navigation.DayImages
+import com.protolys.epicviewer.ui.DayImagesScreen
+import com.protolys.epicviewer.ui.Greeting
 import com.protolys.epicviewer.ui.theme.ColorPalette
 import com.protolys.epicviewer.ui.theme.EPICViewerTheme
 
@@ -32,8 +34,8 @@ class EpicActivity : ComponentActivity() {
                 // Change the variable to this and use Overview as a backup screen if this returns null
                 val currentScreen = DayImages
                 Scaffold(modifier = Modifier.fillMaxSize(), containerColor = ColorPalette.primaryContainer) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    EpicNavHost(
+                        navController = navController,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -42,18 +44,3 @@ class EpicActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    EPICViewerTheme {
-        Greeting("Android")
-    }
-}
