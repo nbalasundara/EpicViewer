@@ -9,7 +9,7 @@ import com.protolys.epicviewer.navigation.DailyImages
 import com.protolys.epicviewer.navigation.DayImageDetail
 import com.protolys.epicviewer.navigation.DayImages
 import com.protolys.epicviewer.navigation.DayImagesAnimation
-import com.protolys.epicviewer.ui.DailyImagesScreen
+import com.protolys.epicviewer.ui.DailyImagesHomeScreen
 import com.protolys.epicviewer.ui.DayImageDetailScreen
 import com.protolys.epicviewer.ui.DayImagesAnimationScreen
 import com.protolys.epicviewer.ui.DayImagesScreen
@@ -25,7 +25,7 @@ fun EpicNavHost(
         modifier = modifier
     ) {
         composable(route = DailyImages.route) {
-            DailyImagesScreen(
+            DailyImagesHomeScreen(
             )
         }
         composable(route = DayImages.route) {
