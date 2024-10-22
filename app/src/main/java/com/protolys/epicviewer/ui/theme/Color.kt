@@ -22,8 +22,8 @@ val Green = Color(0x008F56FF)
 
 // Epic Viewer is always dark themed.
 val ColorPalette = darkColorScheme( // TODO
-    primary = Black,
-    onPrimary = Color.White,
+    primary = Gray5,
+    onPrimary = Color.Blue,
     primaryContainer = Black,
     surface = Black,
     onSurface = LightBlue,

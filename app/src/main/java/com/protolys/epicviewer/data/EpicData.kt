@@ -71,10 +71,14 @@ data class ImageDate(
     val id = date.hashCode()
     // For home screen
     val monsun : String
+    val dailyImageDate : String
     init {
         val formatter = SimpleDateFormat("EEEEEEEE")
         val utcZone: TimeZone = TimeZone.getTimeZone("UTC")
         formatter.timeZone = utcZone
         monsun = formatter.format(date)
+        val formatter2 = SimpleDateFormat("MM/dd/YYYY")
+        formatter.timeZone = utcZone
+        dailyImageDate = formatter2.format(date)
     }
 }

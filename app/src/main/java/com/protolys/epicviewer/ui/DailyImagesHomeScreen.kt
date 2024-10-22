@@ -1,29 +1,44 @@
 package com.protolys.epicviewer.ui
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.Icons.Filled
+import androidx.compose.material.icons.rounded.KeyboardArrowRight
+import androidx.compose.material.icons.rounded.ShoppingCart
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import com.protolys.epicviewer.R
 import com.protolys.epicviewer.data.ImageDate
 import com.protolys.epicviewer.data.toDate
-import com.protolys.epicviewer.ui.theme.EPICViewerTheme
-import java.util.Date
 
 @Composable
 fun DailyImagesHomeScreen(
-
+    modifier: Modifier = Modifier
 ) {
     val dailyImages = rememberSaveable() {
         listOf(
@@ -33,9 +48,10 @@ fun DailyImagesHomeScreen(
         )
     }
     LazyColumn(
-        modifier = Modifier
-            .padding(16.dp)
-            .semantics { contentDescription = "Daily Images Home Screen" }
+        modifier = modifier.fillMaxSize()
+            .semantics { contentDescription = "Daily Images Home Screen"},
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(dailyImages, key = {imageDate -> imageDate.id})
         {
@@ -44,15 +60,61 @@ fun DailyImagesHomeScreen(
     }
 }
 
+@Composable
+fun showDay(imageDate:ImageDate, modifier: Modifier = Modifier) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primary
+        ),
+        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+    ) {
+        CardContent(imageDate)
+    }
+}
 
 @Composable
-fun showDay(imageDate:ImageDate/*, modifier: Modifier = Modifier*/) {
-    Text(
-        text = imageDate.monsun,
-        color = Color.Black
-        //modifier = modifier
-    )
+private fun CardContent(day: ImageDate) {
+    Row(
+        modifier = Modifier
+            .padding(12.dp)
+            .animateContentSize(
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                    stiffness = Spring.StiffnessLow
+                )
+            )
+    ) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(12.dp)
+        ) {
+            Text(
+                text = day.monsun/*, style = MaterialTheme.typography.headlineMedium.copy(
+                    fontWeight = FontWeight.ExtraBold
+                )*/
+            )
+            Text(text = day.dailyImageDate)
+        }
+        Column(
+            modifier = Modifier
+                .padding(12.dp)
+        ) {
+            Text(
+                text = "12/12"/*, style = MaterialTheme.typography.bodySmall.copy(
+                    fontWeight = FontWeight.ExtraBold
+                )*/
+            )
+            IconButton(onClick = {  }) {
+                Icon(
+                    Icons.Rounded.KeyboardArrowRight,
+                    contentDescription = ""
+                )
+            }
+        }
+    }
 }
+
 
 //
 // Previews
