@@ -2,15 +2,13 @@ package com.protolys.epicviewer.data
 
 import androidx.compose.runtime.Immutable
 import kotlinx.serialization.KSerializer
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.TimeZone
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.TimeZone
 
 //
 // Extension functions on String for various date conversions

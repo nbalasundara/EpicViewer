@@ -1,8 +1,8 @@
 package com.protolys.epicviewer
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.protolys.epicviewer.navigation.DailyImagesHome
@@ -13,7 +13,6 @@ import com.protolys.epicviewer.ui.DailyImagesHomeScreen
 import com.protolys.epicviewer.ui.DayImageDetailScreen
 import com.protolys.epicviewer.ui.DayImagesAnimationScreen
 import com.protolys.epicviewer.ui.DayImagesScreen
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 fun EpicNavHost(
