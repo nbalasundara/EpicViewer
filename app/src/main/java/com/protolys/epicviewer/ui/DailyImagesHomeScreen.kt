@@ -35,6 +35,8 @@ import androidx.compose.ui.unit.dp
 //import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.protolys.epicviewer.EpicViewModel
 import com.protolys.epicviewer.data.ImageDate
+import com.protolys.epicviewer.data.dailyImageDate
+import com.protolys.epicviewer.data.monsun
 import com.protolys.epicviewer.data.toDate
 
 
@@ -49,8 +51,6 @@ fun DailyImagesHomeScreen(
         viewModel.fetchAllDates().collect {
             x = it
         }
-        // Update State with either an Error or Success result.
-        // This will trigger a recomposition where this State is read
         value = (if (x != null) {
             Result.success(x)
         } else {

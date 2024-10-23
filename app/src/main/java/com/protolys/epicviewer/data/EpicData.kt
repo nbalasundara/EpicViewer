@@ -70,15 +70,27 @@ data class ImageDate(
     // a convenience function for the lazy list and other compose components
     val id = date.hashCode()
     // For home screen
-    val monsun : String
-    val dailyImageDate : String
+    //val monsun : String
     init {
         val formatter = SimpleDateFormat("EEEEEEEE")
         val utcZone: TimeZone = TimeZone.getTimeZone("UTC")
         formatter.timeZone = utcZone
-        monsun = formatter.format(date)
-        val formatter2 = SimpleDateFormat("MM/dd/YYYY")
-        formatter.timeZone = utcZone
-        dailyImageDate = formatter2.format(date)
     }
 }
+val ImageDate.id : Int get() { return date.hashCode() }
+
+val ImageDate.dailyImageDate: String
+    get() {
+        val formatter = SimpleDateFormat("MM/dd/YYYY")
+        val utcZone: TimeZone = TimeZone.getTimeZone("UTC")
+        formatter.timeZone = utcZone
+        return formatter.format(date)
+    }
+
+val ImageDate.monsun: String
+    get() {
+        val formatter = SimpleDateFormat("EEEEEEEE")
+        val utcZone: TimeZone = TimeZone.getTimeZone("UTC")
+        formatter.timeZone = utcZone
+        return formatter.format(date)
+    }
