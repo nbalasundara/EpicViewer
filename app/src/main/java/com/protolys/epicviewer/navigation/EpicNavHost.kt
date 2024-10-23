@@ -13,9 +13,11 @@ import com.protolys.epicviewer.ui.DailyImagesHomeScreen
 import com.protolys.epicviewer.ui.DayImageDetailScreen
 import com.protolys.epicviewer.ui.DayImagesAnimationScreen
 import com.protolys.epicviewer.ui.DayImagesScreen
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 fun EpicNavHost(
+    viewModel : EpicViewModel,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -26,19 +28,30 @@ fun EpicNavHost(
     ) {
         composable(route = DailyImagesHome.route) {
             DailyImagesHomeScreen(
-
+                viewModel = viewModel,
+                modifier = modifier,
+                next = { imageDate -> navController.navigateSingleTopTo( "") }
             )
         }
+
         composable(route = DayImages.route) {
             DayImagesScreen(
+                viewModel = viewModel,
+                modifier = modifier
             )
         }
+
         composable(route = DayImageDetail.route) {
             DayImageDetailScreen(
+                viewModel = viewModel,
+                modifier = modifier
             )
         }
+
         composable(route = DayImagesAnimation.route) {
             DayImagesAnimationScreen(
+                viewModel = viewModel,
+                modifier = modifier
             )
         }
     }

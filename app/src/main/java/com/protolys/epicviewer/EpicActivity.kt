@@ -39,6 +39,7 @@ class EpicActivity : ComponentActivity() {
                         )
                     }) { innerPadding ->
                     EpicNavHost(
+                        EpicViewModel(),
                         navController = navController,
                         modifier = Modifier.padding(innerPadding).fillMaxSize()
                     )

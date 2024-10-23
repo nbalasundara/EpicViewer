@@ -24,7 +24,7 @@ class NavigationTest {
             navController.navigatorProvider.addNavigator(
                 ComposeNavigator()
             )
-            EpicNavHost(navController = navController)
+            EpicNavHost(navController = navController, viewModel = EpicViewModel())
         }
     }
 
