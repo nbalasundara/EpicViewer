@@ -38,9 +38,10 @@ import com.protolys.epicviewer.data.toDate
 
 @Composable
 fun DailyImagesHomeScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    next : ((ImageDate) -> Void)
 ) {
-    val dailyImages = rememberSaveable() {
+    val dailyImages = rememberSaveable() { // TODO from ViewModel
         listOf(
             ImageDate("2024-10-20".toDate()),
             ImageDate("2024-10-19".toDate()),
@@ -77,12 +78,6 @@ private fun CardContent(day: ImageDate) {
     Row(
         modifier = Modifier
             .padding(12.dp)
-            .animateContentSize(
-                animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioMediumBouncy,
-                    stiffness = Spring.StiffnessLow
-                )
-            )
     ) {
         Column(
             modifier = Modifier
@@ -96,16 +91,16 @@ private fun CardContent(day: ImageDate) {
             )
             Text(text = day.dailyImageDate)
         }
-        Column(
+        Row(
             modifier = Modifier
                 .padding(12.dp)
         ) {
             Text(
-                text = "12/12"/*, style = MaterialTheme.typography.bodySmall.copy(
-                    fontWeight = FontWeight.ExtraBold
-                )*/
+                text = "12/12"/*, TODO */
             )
-            IconButton(onClick = {  }) {
+            IconButton(onClick = {
+
+            }) {
                 Icon(
                     Icons.Rounded.KeyboardArrowRight,
                     contentDescription = ""

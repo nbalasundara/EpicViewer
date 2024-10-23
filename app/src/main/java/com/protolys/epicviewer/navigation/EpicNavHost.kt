@@ -26,6 +26,7 @@ fun EpicNavHost(
     ) {
         composable(route = DailyImagesHome.route) {
             DailyImagesHomeScreen(
+
             )
         }
         composable(route = DayImages.route) {
