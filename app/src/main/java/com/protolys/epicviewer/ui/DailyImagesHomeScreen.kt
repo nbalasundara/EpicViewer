@@ -1,4 +1,6 @@
 package com.protolys.epicviewer.ui
+import android.media.Image
+import android.util.Log.v
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -7,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.rounded.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -17,21 +20,23 @@ import androidx.compose.material3.Text
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+//import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.protolys.epicviewer.EpicViewModel
 import com.protolys.epicviewer.data.ImageDate
 import com.protolys.epicviewer.data.toDate
-import kotlinx.coroutines.launch
+
 
 @Composable
 fun DailyImagesHomeScreen(
@@ -39,34 +44,33 @@ fun DailyImagesHomeScreen(
     viewModel : EpicViewModel,
     next: (ImageDate) -> Unit
 ) {
-
-    var dailyImages = rememberSaveable<List<ImageDate>>() {
-        listOf<ImageDate>()
-    }
-
-    val scope = rememberCoroutineScope()
-
-    scope.launch {
-        try {
-            viewModel.fetchAllDates().collect()
-            { value ->
-                dailyImages = value
-            }
-        } catch (e: Exception) {
-            dailyImages = listOf<ImageDate>()
-           // TODO println("The flow has thrown an exception: $e")
+    val dailyImages by produceState<Result<List<ImageDate>?>>(initialValue = Result.success(listOf<ImageDate>())) {
+        var x : List<ImageDate>? = null
+        viewModel.fetchAllDates().collect {
+            x = it
         }
+        // Update State with either an Error or Success result.
+        // This will trigger a recomposition where this State is read
+        value = (if (x != null) {
+            Result.success(x)
+        } else {
+            Result.failure(Exception("fetch failed!")) // TODO handle exceptions
+        })
     }
 
-    LazyColumn(
-        modifier = modifier.fillMaxSize()
-            .semantics { contentDescription = "Daily Images Home Screen"},
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        items(dailyImages, key = {imageDate -> imageDate.id})
-        {
-            showDay(it, modifier=modifier)
+    if (dailyImages.isSuccess && dailyImages.getOrNull() != null) {
+        LazyColumn(
+            modifier = modifier.fillMaxSize()
+                .semantics { contentDescription = "Daily Images Home Screen" },
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            dailyImages.onSuccess {
+                items(dailyImages.getOrNull()!!, key = { imageDate -> imageDate.id })
+                {
+                    showDay(it, modifier = modifier)
+                }
+            }
         }
     }
 }
@@ -95,9 +99,7 @@ private fun CardContent(day: ImageDate) {
                 .padding(12.dp)
         ) {
             Text(
-                text = day.monsun/*, style = MaterialTheme.typography.headlineMedium.copy(
-                    fontWeight = FontWeight.ExtraBold
-                )*/
+                text = day.monsun
             )
             Text(text = day.dailyImageDate)
         }
@@ -119,7 +121,6 @@ private fun CardContent(day: ImageDate) {
         }
     }
 }
-
 
 //
 // Previews
